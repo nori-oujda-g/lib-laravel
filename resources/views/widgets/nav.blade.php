@@ -31,9 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('customers') }}">customers</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('customer') }}">customer</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rediriger') }}">rediriger vers test</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,5 +1,5 @@
-https://www.youtube.com/watch?v=8zMi3YfYHcE&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=27
-01:00
+https://www.youtube.com/watch?v=yAKusEKfpno&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=30
+00:00
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home

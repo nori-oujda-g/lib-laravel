@@ -13,6 +13,7 @@
     @include('widgets.nav')
     <h1 style="text-align:center;">my lib laravel</h1>
     <main>
+        @include('widgets.flashbag')
         @yield('main')
     </main>
     <footer class="mt-4 py-4 col-12" style="background: black;color:white;">
