@@ -1,0 +1,54 @@
+https://www.youtube.com/watch?v=8zMi3YfYHcE&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=27
+01:00
+installation:
+	composer global require laravel/installer
+ajouter ce path à .bashrc et .zshrc dans /root et home
+	export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+new app:
+	laravel new exp1
+pour lancer:
+	composer run dev
+ou	php artisan serve
+vider le cache:
+	php artisan config:cache
+	php artisan view:clear
+	php artisan config:clear
+	composer dump-autoload
+--------------------------------------------------
+le dossier de developpement et du codage: app
+les dossiers vendor , bootstrap on les touche pas
+--------------------------------------------------
+creer un controller:
+	php artisan make:controller myController1
+	il sera dans le chemin: exp1/app/Http/Controllers/myController1.php
+------------------------------------------------------------
+creer un composant:
+	php artisan make:component myComp
+et je reçoi deux fichiers:	
+   INFO  Component [app/View/Components/usersComp.php] created successfully.  
+   INFO  View [resources/views/components/users-comp.blade.php] created successfully. 
+---------------------------------------------------------------
+creer une entité ou un modèle nomé : Customer:
+	php artisan make:model Customer
+creer une entité ou un modèle nomé : Customer avec migration orm:
+	php artisan make:model Customer --migration
+	php artisan make:model Customer -m
+pour faire la migration (céer les tables dans mysql depuis de fichiers de migration laravel):
+	php artisan migrate
+après mise à jour de migration:
+	php artisan migrate:fresh 	--> pour éviter le risque de perte de données
+	php artisan migrate:refresh
+	http://localhost/phpmyadmin
+se connecter à mysql:
+	php artisan db  --> equivalant à : mysql -u root -p
+appliquer le seeder qui est dans une seeder mySedeer.php  :
+	php artisan db:seed --class=DatabaseSeeder     pour specifier un seeder et ne pas executer tous les seeders
+pour appliquer le seeder sur le fichier par defaut: DatabaseSeeder.php
+	php artisan db:seed
+on peu ajouter dans la methode run dans DatabaseSeeder ça: $this->call(mySedeer::class); et le seeder: php artisan db:seed sera appliqué sur DatabaseSeeder et mySeeder
+créer un nouveau seeder:
+	php artisan make:seeder CustomerSeeder
+regenerer les seeds:
+	php artisan migrate:fresh --seed
+creer une factory:
+	php artisan make:factory CustomerFactory --model=Customer

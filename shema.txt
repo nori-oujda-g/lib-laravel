@@ -1,0 +1,4 @@
+-dans exp1/resources/views il ya la vue et les pages qui serons affichés.
+-dans exp1/routes/web.php c'est le controlleur et ôu on va faire le routage.
+-dans exp1/database/seeders/DatabaseSeeder.php il insert des lignes de test dans database
+
