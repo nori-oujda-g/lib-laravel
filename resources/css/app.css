@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+/* @import 'tailwindcss'; */
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +8,26 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 500%;
+}
+
+main {
+    padding-bottom: 100px;
+}
+
+footer {
+    background: rgb(3, 3, 3);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    z-index: 111;
+}
+
+.navbar {
+    --bs-navbar-padding-y: 2px;
 }

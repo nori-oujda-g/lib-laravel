@@ -34,7 +34,40 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rediriger') }}">rediriger vers test</a>
                 </li>
+                {{-- @guest
+                @endguest --}}
             </ul>
         </div>
+        @if (empty(Auth::guard('customer')->user()))
+            <div class="navbar-nav float-end">
+                <a class="nav-link" href="{{ route('login') }}">se connecter</a>
+            </div>
+        @endif
+        @if (!empty(Auth::guard('customer')->user()))
+            <div class="navbar-nav dropdown float-end">
+                <ul class="nav-link dropdown-toggle btn-group" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="padding:0;margin:0;">
+                    <li class="btn">{{ Auth::guard('customer')->user()->name }}</li>
+                    {{-- <li class="btn">{{ auth()->user()->name }}</li> --}}
+                    <li class="btn" style="--bs-btn-padding-y:0;"> <img
+                            src="{{ Auth::guard('customer')->user()->image }}" class="avatar" alt=""
+                            srcset=""></li>
+
+                </ul>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                    style="left:-8%;box-shadow: 2px 2px 4px 1px #323030;">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}">se déconnecter</a></li>
+                </ul>
+            </div>
+        @endif
+
+        {{--    
+        @auth
+           @endauth --}}
+
     </div>
 </nav>

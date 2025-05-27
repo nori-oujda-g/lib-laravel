@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use \Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -36,12 +41,45 @@ class CustomerController extends Controller
     {
         return view('customer.create');
     }
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
+    {
+        //  formFields
+        // dans CustomerRequest on a mis tous les critères de validate
+        $validate = $request->validated();
+        $validate['password'] = Hash::make($request->password);
+        Customer::create($validate);
+        return redirect()->route('customers')->with('success', 'successful insertion');
+    }
+    public function store3(Request $request)
+    {
+        $validate = $request->validate([
+            // between:3,100 | date | email | url | 
+            'name' => 'required|min:3|max:100|unique:customers',
+            'email' => 'required|email|unique:customers',
+            'image' => 'required|url',
+            'password' => 'required|confirmed|min:3|max:100',
+        ]);
+        $validate['password'] = Hash::make($request->password);
+        Customer::create($validate);
+        // la premier solution pour l'insrtion:        
+        // Customer::create($request->post());
+        // les autres solutions :
+        // Customer::create($request->all());
+        // Customer::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'image' => $request->image,
+        //     'bio' => $request->bio
+        // ]);
+        return redirect()->route('customers')->with('success', 'successful insertion');
+    }
+    public function store2(Request $request)
     {
         try {
             // dd($request->all());
             $request->validate([
-                'name' => 'required',
+                // between:3,100 | date | email | url | 
+                'name' => 'required|min:3|max:10|unique:customers',
             ]);
             // la premier solution pour l'insrtion:
             Customer::create($request->post());
@@ -72,5 +110,29 @@ class CustomerController extends Controller
         // back('/test');  retour à la page precedente .
         // back('/customer')->withInput();  retour à la page precedente avec le formulaire remplie .
         return redirect('/test');
+    }
+    public function login()
+    {
+        return view('customer.login');
+    }
+    public function connect(Request $request): RedirectResponse
+    {
+        $credentials = ['email' => $request->login, 'password' => $request->password];
+        // dd(Auth::guard('customer')->attempt($credentials));
+        //se connecter directement vas faire des problemes , regarder le fichier: configuration-auth.md pour voir la configuration necessaire pour authentifiquation. 
+        if (Auth::guard('customer')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/')->with('success', 'you are well connected 😊');
+        } else {
+            return back()->withErrors([
+                'login' => 'email or password are incorrect'
+            ])->onlyInput('login');
+        }
+    }
+    public function logout(): RedirectResponse
+    {
+        Session::flush();
+        Auth::guard('customer')->logout();
+        return redirect('/')->with('success', 'you are well deconnected 🙄');
     }
 }

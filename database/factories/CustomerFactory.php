@@ -19,6 +19,7 @@ class CustomerFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'image' => fake()->name(),
+            'password' => fake()->name(),
             'bio' => fake()->text(),
         ];
     }

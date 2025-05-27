@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name', 30);
             $table->string('email', 80)->unique('email');
             $table->string('image', 100);
+            $table->string('password', 100);
             $table->text('bio')->nullable();
             $table->timestamps();
         });

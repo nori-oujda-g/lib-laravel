@@ -47,8 +47,12 @@ Route::get('/customers', [CustomerController::class, 'index'])->name('customers'
 // Route::get('/customer/{customer:email}', [CustomerController::class, 'get2']) si on veut specifier le paramettre exemple : email
 // cette methode (get2) appelé : Route model binding
 Route::get('/customer/{customer}', [CustomerController::class, 'get2']) // par defaut le param est : id
-    ->where('id', '\d+')
+    ->where('customer', '\d+')
     ->name('customer');
-Route::get('/create', [CustomerController::class, 'create'])->name('create');
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('create');
+
 Route::post('/store', [CustomerController::class, 'store'])->name('store');
 Route::get('/rediriger', [CustomerController::class, 'rediriger'])->name('rediriger');
+Route::get('/customer/login', [CustomerController::class, 'login'])->name('login');
+Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('logout');
+Route::post('/customer/connect', [CustomerController::class, 'connect'])->name('connect');

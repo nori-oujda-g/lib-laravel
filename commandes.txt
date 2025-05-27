@@ -1,5 +1,5 @@
-https://www.youtube.com/watch?v=yAKusEKfpno&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=30
-00:00
+https://www.youtube.com/watch?v=wL7XqQ0hyi4&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=35
+04:00
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home
@@ -52,3 +52,7 @@ regenerer les seeds:
 	php artisan migrate:fresh --seed
 creer une factory:
 	php artisan make:factory CustomerFactory --model=Customer
+creer une request:
+    php artisan make:request CustomerRequest
+	
+	
