@@ -35,5 +35,12 @@ class Customer extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function getAvatarAttribute($value)
+    {
+        // return Storage::disk('')->url($this->image);
+        if (!empty($value))
+            return $value;
+        else
+            return $value . 'image/avatar.png';
+    }
 }

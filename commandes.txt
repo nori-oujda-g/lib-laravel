@@ -14,8 +14,11 @@ ou	php artisan serve
 vider le cache:
 	php artisan config:cache
 	php artisan view:clear
+	php artisan cache:clear
 	php artisan config:clear
 	composer dump-autoload
+	
+
 --------------------------------------------------
 le dossier de developpement et du codage: app
 les dossiers vendor , bootstrap on les touche pas
@@ -71,5 +74,6 @@ public function down(): void{
     }
     ensuite on lance cette commande:
     php artisan migrate
-	
-	
+-----------------------------------------------
+creation d'un model avec sa migration, son controlleur, sa resource:
+    php artisan make:model MyModel -mcr              m:migration , c:controlleur , r:resource

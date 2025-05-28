@@ -4,7 +4,7 @@
 @endsection
 @section('main')
     <h2>list customers</h2>
-    <a name="" id="" class="btn btn-primary ms-2" href="{{ route('create') }}" role="button">
+    <a name="" id="" class="btn btn-primary ms-2" href="{{ route('customers.create') }}" role="button">
         <i class="bi bi-file-earmark-plus-fill"></i>
     </a>
     @php
@@ -33,12 +33,12 @@
                     <td><img src="{{ $customer->image }}" alt="" width="{{ $size }}"
                             height="{{ $size }}" srcset=""> </td>
                     <td><a name="" id="" class="btn btn-info text-light {{ $mt }}"
-                            href="{{ route('customer', $customer->id) }}" role="button">
+                            href="{{ route('customers.show', $customer->id) }}" role="button">
                             <i class="bi bi-eye"></i>
                         </a>
                     </td>
                     <td>
-                        <form action="{{ route('edit', $customer->id) }}" method="get">
+                        <form action="{{ route('customers.edit', $customer->id) }}" method="get">
                             @csrf
                             <button type="submit" class="btn btn-warning text-light {{ $mt }}">
                                 <i class="bi bi-pen-fill"></i>
@@ -49,7 +49,7 @@
 
                     </td>
                     <td>
-                        <form action="{{ route('delete', $customer->id) }}" method="post">
+                        <form action="{{ route('customers.destroy', $customer->id) }}" method="post">
                             @method('DELETE')
                             @csrf
                             {{-- csrf pour le probleme:page expired --}}

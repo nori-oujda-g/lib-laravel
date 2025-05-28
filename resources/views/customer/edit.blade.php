@@ -4,7 +4,7 @@
 @endsection
 @section('main')
     <h2>update customer</h2>
-    <a name="" id="" class="btn btn-primary ms-2" href="{{ route('customers') }}" role="button"><i
+    <a name="" id="" class="btn btn-primary ms-2" href="{{ route('customers.index') }}" role="button"><i
             class="bi bi-arrow-return-left"></i></a>
     @if ($errors->any())
         <x-alert type="danger">
@@ -15,7 +15,8 @@
             </ul>
         </x-alert>
     @endif
-    <form method="POST" action="{{ route('update', $customer->id) }}" class="container col-6" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('customers.update', $customer->id) }}" class="container col-6"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row  align-items-center mt-1">

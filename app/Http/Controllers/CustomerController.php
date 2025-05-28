@@ -34,7 +34,7 @@ class CustomerController extends Controller
 
         return view('customer.customer', compact('customer'));
     }
-    public function get2(Customer $customer)
+    public function show(Customer $customer)
     {
         // cette methode appelé : Route model binding
         return view('customer.customer', compact('customer'));
@@ -45,11 +45,14 @@ class CustomerController extends Controller
     }
     public function store(CustomerRequest $request)
     {
+        // dd($request->all());
         //  formFields
         // dans CustomerRequest on a mis tous les critères de validate
         $validate = $request->validated();
         if ($request->hasFile('avatar'))
             $validate['avatar'] = $request->file('avatar')->store('image', 'public');
+        else
+            $validate['avatar'] = '';
         // $validate['avatar'] = $request->file('avatar')->storeAs(
         //     'image',
         //     '_' . $validate['email'] . '.png',
@@ -58,7 +61,7 @@ class CustomerController extends Controller
         $validate['password'] = Hash::make($request->password);
         // dd($validate);
         Customer::create($validate);
-        return redirect()->route('customers')->with('success', 'successful insertion');
+        return redirect()->route('customers.index')->with('success', 'successful insertion');
     }
     public function store3(Request $request)
     {
@@ -81,7 +84,7 @@ class CustomerController extends Controller
         //     'image' => $request->image,
         //     'bio' => $request->bio
         // ]);
-        return redirect()->route('customers')->with('success', 'successful insertion');
+        return redirect()->route('customers.index')->with('success', 'successful insertion');
     }
     public function store2(Request $request)
     {
@@ -101,11 +104,11 @@ class CustomerController extends Controller
             //     'image' => $request->image,
             //     'bio' => $request->bio
             // ]);
-            return redirect()->route('customers')->with('success', 'successful insertion');
+            return redirect()->route('customers.index')->with('success', 'successful insertion');
             // ->with('error', 'insertion error !');
             // ->with('success', ''): c'est un flashbag pour afficher un message après l'ajout
         } catch (Exception $e) {
-            return redirect()->route('customers')->with('error', 'insertion error !');
+            return redirect()->route('customers.index')->with('error', 'insertion error !');
             // echo 'Une erreur est survenue : ' . $e->getMessage();
         }
 
@@ -145,11 +148,11 @@ class CustomerController extends Controller
         Auth::guard('customer')->logout();
         return redirect('/')->with('success', 'you are well deconnected 🙄');
     }
-    public function delete(Customer $customer)
+    public function destroy(Customer $customer)
     {
         return $customer->delete() ?
-            redirect()->route('customers')->with('success', 'successful delete 🤓') :
-            redirect()->route('customers')->with('error', 'error delete 🥵');
+            redirect()->route('customers.index')->with('success', 'successful delete 🤓') :
+            redirect()->route('customers.index')->with('error', 'error delete 🥵');
     }
     public function edit(Customer $customer)
     {
@@ -168,6 +171,6 @@ class CustomerController extends Controller
         $customer->fill($validate)->save();
         // dd($customer);
         // dd($request->validated());
-        return redirect()->route('customers')->with('success', 'successful update 🤓');
+        return redirect()->route('customers.index')->with('success', 'successful update 🤓');
     }
 }

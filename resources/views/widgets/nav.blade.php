@@ -29,7 +29,7 @@
                     <a class="nav-link" href="{{ route('users') }}">users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('customers') }}">customers</a>
+                    <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rediriger') }}">rediriger vers test</a>
@@ -49,9 +49,12 @@
                     data-bs-toggle="dropdown" aria-expanded="false" style="padding:0;margin:0;">
                     <li class="btn">{{ Auth::guard('customer')->user()->name }}</li>
                     {{-- <li class="btn">{{ auth()->user()->name }}</li> --}}
+                    {{-- <li class="btn" style="--bs-btn-padding-y:0;"> <img
+                            src="{{ Auth::guard('customer')->user()->image }}" class="image" alt=""
+                            srcset=""></li> --}}
                     <li class="btn" style="--bs-btn-padding-y:0;"> <img
-                            src="{{ Auth::guard('customer')->user()->image }}" class="_image" alt=""
-                            srcset=""></li>
+                            src="{{ asset('storage/' . Auth::guard('customer')->user()->avatar) }}" class="image"
+                            alt="" srcset=""></li>
 
                 </ul>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"

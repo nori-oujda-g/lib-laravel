@@ -1,0 +1,86 @@
+<!-- <form method="POST" action="http://127.0.0.1:8000/customer/10/edit?_token=BB22u26vqOPSsINy08jVyoZdMxViRTswY1YLAtAt" -->
+<!-- <form method="POST" action="http://127.0.0.1:8000/store" class="container col-6" enctype="multipart/form-data"> -->
+<form method="POST" action="http://127.0.0.1:8000/store" class="container col-6" enctype="multipart/form-data">
+    @csrf
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="name" class="col-form-label">NAME</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="text" id="name" name="name" value="ali" class="form-control">
+            @error('name')
+            <small class="text-danger">{{ $message }} </small>
+            @enderror
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="avatar" class="col-form-label">AVATAR</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="file" id="avatar" name="avatar" {{-- value="{{ old('name') }}" --}} class="form-control">
+            {{-- @error('name')
+                    <small class="text-danger">{{ $message }} </small>
+            @enderror --}}
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="email" class="col-form-label">EMAIL</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="text" id="email" name="email" value="ali@e.com" class="form-control">
+            @error('email')
+            <small class="text-danger">{{ $message }} </small>
+            @enderror
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="image" class="col-form-label">IMAGE</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="text" id="image" name="image" value="ali" class="form-control">
+            @error('image')
+            <small class="text-danger">{{ $message }} </small>
+            @enderror
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="password" class="col-form-label">PASSWORD</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="password" id="password" name="password" value="ali" class="form-control">
+            @error('password')
+            <small class="text-danger">{{ $message }} </small>
+            @enderror
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="password_confirmation" class="col-form-label">CONFIRM PASSWORD</label>
+        </div>
+        <div class="col-auto col-6">
+            <input type="password" id="password_confirmation" name="password_confirmation" value="ali"
+                class="form-control">
+            {{-- il faux respecter x_confirmation --}}
+            @error('password_confirmation')
+            <small class="text-danger">{{ $message }} </small>
+            @enderror
+        </div>
+    </div>
+    <div class="row  align-items-center mt-1">
+        <div class="col-auto col-6">
+            <label for="bio" class="col-form-label">DESCRIPTION</label>
+        </div>
+        <div class="col-auto col-6">
+            <textarea class="form-control" name="bio" id="" rows="3">ali ali</textarea>
+        </div>
+    </div>
+    <div class="d-grid mt-1">
+        <button type="submit" class="btn btn-primary btn-block">
+            submit
+        </button>
+    </div>
+</form>

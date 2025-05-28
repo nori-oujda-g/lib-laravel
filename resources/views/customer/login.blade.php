@@ -34,7 +34,7 @@
             </button>
         </div>
         <div class="d-grid mt-1">
-            <a name="" id="" class="btn btn-secondary btn-block" href="{{ route('create') }}"
+            <a name="" id="" class="btn btn-secondary btn-block" href="{{ route('customers.create') }}"
                 role="button">CREATE AN ACCOUNT</a>
         </div>
     </form>
