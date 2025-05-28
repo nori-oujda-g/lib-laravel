@@ -3,14 +3,21 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // class Customer extends Model
 class Customer extends Authenticatable
 {
     use HasFactory; // Utilisation du trait
+    use SoftDeletes; // pour archiver et faire une suppression vertuelle aulien d'une suppression physique
+    // lors de la suppression d'un ligne la colonne : deleted_at sera remplie par la date de suppression , 
+    // cette ligne sera inaxessible sans qu'elle soi supprimé de la database.
     protected $table = 'customers';
+    // on met ici les attributs de type date .
+    protected $dates = ['created_at'];
     protected $fillable = [
         'name',
+        'avatar',
         'email',
         'bio',
         'image',

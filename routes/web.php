@@ -49,6 +49,9 @@ Route::get('/customers', [CustomerController::class, 'index'])->name('customers'
 Route::get('/customer/{customer}', [CustomerController::class, 'get2']) // par defaut le param est : id
     ->where('customer', '\d+')
     ->name('customer');
+Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->name('edit');
+Route::put('/customer/{customer}', [CustomerController::class, 'update'])->name('update');
+Route::delete('/customer/{customer}', [CustomerController::class, 'delete'])->name('delete');
 Route::get('/customer/create', [CustomerController::class, 'create'])->name('create');
 
 Route::post('/store', [CustomerController::class, 'store'])->name('store');

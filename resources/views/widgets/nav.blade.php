@@ -50,7 +50,7 @@
                     <li class="btn">{{ Auth::guard('customer')->user()->name }}</li>
                     {{-- <li class="btn">{{ auth()->user()->name }}</li> --}}
                     <li class="btn" style="--bs-btn-padding-y:0;"> <img
-                            src="{{ Auth::guard('customer')->user()->image }}" class="avatar" alt=""
+                            src="{{ Auth::guard('customer')->user()->image }}" class="_image" alt=""
                             srcset=""></li>
 
                 </ul>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerForUpdateRequest;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\RedirectResponse;
@@ -10,6 +11,7 @@ use \Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Stmt\TryCatch;
 
 class CustomerController extends Controller
 {
@@ -46,7 +48,15 @@ class CustomerController extends Controller
         //  formFields
         // dans CustomerRequest on a mis tous les critères de validate
         $validate = $request->validated();
+        if ($request->hasFile('avatar'))
+            $validate['avatar'] = $request->file('avatar')->store('image', 'public');
+        // $validate['avatar'] = $request->file('avatar')->storeAs(
+        //     'image',
+        //     '_' . $validate['email'] . '.png',
+        //     'public'
+        // );
         $validate['password'] = Hash::make($request->password);
+        // dd($validate);
         Customer::create($validate);
         return redirect()->route('customers')->with('success', 'successful insertion');
     }
@@ -134,5 +144,30 @@ class CustomerController extends Controller
         Session::flush();
         Auth::guard('customer')->logout();
         return redirect('/')->with('success', 'you are well deconnected 🙄');
+    }
+    public function delete(Customer $customer)
+    {
+        return $customer->delete() ?
+            redirect()->route('customers')->with('success', 'successful delete 🤓') :
+            redirect()->route('customers')->with('error', 'error delete 🥵');
+    }
+    public function edit(Customer $customer)
+    {
+        return view('customer.edit', compact('customer'));
+    }
+    public function update(Customer $customer, CustomerForUpdateRequest $request)
+    {
+        $validate = $request->validated();
+        if ($request->hasFile('avatar'))
+            $validate['avatar'] = $request->file('avatar')->store('image', 'public');
+        // $validate['avatar'] = $request->file('avatar')->storeAs(
+        //     'image',
+        //     '_' . $validate['email'] . '.png',
+        //     'public'
+        // );
+        $customer->fill($validate)->save();
+        // dd($customer);
+        // dd($request->validated());
+        return redirect()->route('customers')->with('success', 'successful update 🤓');
     }
 }

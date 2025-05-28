@@ -29,6 +29,7 @@ yarn-error.log
 /storage/framework/sessions
 /storage/framework/views
 /storage/framework/testing
+/storage/app/public/image
 # Ignorer les fichiers de déploiement locaux ou spécifiques
 .env.*
 .php-cs-fixer.cache

@@ -1,9 +1,11 @@
-https://www.youtube.com/watch?v=wL7XqQ0hyi4&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=35
-04:00
+https://www.youtube.com/watch?v=_aC9vEjMRU0&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=42
+03:00
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home
 	export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+afficher la version laravel:
+    php artisan --version
 new app:
 	laravel new exp1
 pour lancer:
@@ -54,5 +56,20 @@ creer une factory:
 	php artisan make:factory CustomerFactory --model=Customer
 creer une request:
     php artisan make:request CustomerRequest
+ajouter une migration pour ajouter une colonne à une table:
+    php artisan make:migration add_avatar_to_customers_table --table=customers
+on confugure le fichier généré:
+public function up(): void{
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('avatar', 150)->after('name');
+        });
+}
+public function down(): void{
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('avatar');
+        });
+    }
+    ensuite on lance cette commande:
+    php artisan migrate
 	
 	

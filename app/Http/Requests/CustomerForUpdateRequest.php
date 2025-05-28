@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class CustomerForUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,10 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:100|unique:customers',
+            'name' => 'required|min:3|max:100',
             'avatar' => 'image|mimes:png,jpg,svg,jpeg|max:10240',
-            // le max de l'image est par defaut en KB .
-            'email' => 'required|email|unique:customers',
+            'email' => 'required|email',
             'image' => 'required|url',
-            'password' => 'required|confirmed|min:3|max:100',
             'bio' => 'nullable|string',
         ];
     }
