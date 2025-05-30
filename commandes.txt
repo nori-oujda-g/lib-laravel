@@ -1,5 +1,5 @@
-https://www.youtube.com/watch?v=_aC9vEjMRU0&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=42
-03:00
+https://www.youtube.com/watch?v=Vvkj2OvywS4&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=48
+08:00
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home
@@ -77,3 +77,13 @@ public function down(): void{
 -----------------------------------------------
 creation d'un model avec sa migration, son controlleur, sa resource:
     php artisan make:model MyModel -mcr              m:migration , c:controlleur , r:resource
+    php artisan make:model Publication -mcr
+-------------------------------------------------
+creation d'un middleware:
+    php artisan make:middleware EnsureTokenIsValide 
+-----------------------------------------
+mettre les routes dans le cache:
+    php artisan route:cache
+et pour vider et anuler ce cache:
+    php artisan route:clear
+le but de ce cache pour que les routes fonctionne plus vite , mais c'est déconseillé en dev car il faut chaque fois generer le cache.

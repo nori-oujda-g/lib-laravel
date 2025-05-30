@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\CustomerForUpdateRequest;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
@@ -15,6 +16,11 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class CustomerController extends Controller
 {
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');
+    //     $this->middleware(Authenticate::class);
+    // }
     public function index()
     {
         // dd(Customer::all());

@@ -32,7 +32,16 @@
                     <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('rediriger') }}">rediriger vers test</a>
+                    <a class="nav-link" href="{{ route('rediriger') }}">redir vers test</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/facult/22">param facult</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/route">route info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('facebook') }}">dedirect vers ext</a>
                 </li>
                 {{-- @guest
                 @endguest --}}
