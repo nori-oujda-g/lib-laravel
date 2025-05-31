@@ -1,5 +1,10 @@
 https://www.youtube.com/watch?v=Vvkj2OvywS4&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=48
 08:00
+------------------------------------------------------------------------
+arret dans cette partie:
+https://www.youtube.com/watch?v=6BI7Vc2K32M&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=53
+Ajouter publication laravel darija
+-----------------------------------------------------------
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home
@@ -87,3 +92,8 @@ mettre les routes dans le cache:
 et pour vider et anuler ce cache:
     php artisan route:clear
 le but de ce cache pour que les routes fonctionne plus vite , mais c'est déconseillé en dev car il faut chaque fois generer le cache.
+-------------------------------------------------------------------
+creer un controlleur dans un nouveaux dossier pour un api :
+    php artisan make:controller API/CustomerController --model=Customer --api
+pour verifier si les api de ce controlleur sont ajouté:
+    php artisan route:list --model=Customer --api

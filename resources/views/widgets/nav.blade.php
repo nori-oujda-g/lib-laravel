@@ -16,32 +16,49 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('vars') }}">vars</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-notion-base" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        notions de base
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-notion-base">
+                        <li><a class="dropdown-item" href="{{ route('vars') }}">vars</a>
+                        <li><a class="dropdown-item" href="{{ route('test') }}">test</a>
+                        <li><a class="dropdown-item" href="{{ route('compact') }}">compact</a>
+                        <li><a class="dropdown-item" href="{{ route('users') }}">users</a>
+                        <li><a class="dropdown-item" href="{{ route('rediriger') }}">redir vers test</a>
+                        <li><a class="dropdown-item" href="/facult/22">param facult</a>
+                        <li><a class="dropdown-item" href="/route">route info</a>
+                        <li><a class="dropdown-item" href="{{ route('facebook') }}">dedirect vers ext</a>
+                        <li><a class="dropdown-item" href="/file2">lire fichier pdf</a>
+                        <li><a class="dropdown-item" href="#">void</a>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('test') }}">test</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('compact') }}">compact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users') }}">users</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-api" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Api
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-api">
+                        <li><a class="dropdown-item" href="/api/api1">simple exp</a></li>
+                        <li><a class="dropdown-item" href="/api/customers">customers</a></li>
+                        <li><a class="dropdown-item" href="/api/customers/2">show customer</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('rediriger') }}">redir vers test</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/facult/22">param facult</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/route">route info</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('facebook') }}">dedirect vers ext</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-publication" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        publications
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-publication">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="{{ route('publications.create') }}">new pub</a></li>
+                        <li><a class="dropdown-item" href="{{ route('publications.index') }}">pubs</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </li>
                 {{-- @guest
                 @endguest --}}

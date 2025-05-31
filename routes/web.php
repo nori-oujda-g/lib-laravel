@@ -3,11 +3,13 @@
 use App\Http\Controllers\compact;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Middleware\Guest;
 use App\Services\Calcul;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 /*
 type de routes qu'on a: 
@@ -101,6 +103,8 @@ Route::middleware([Authenticate::class])->group(function () {
 //     });
 // });
     Route::resource('customers', CustomerController::class);
+    Route::resource('publications', PublicationController::class);
+    // php artisan route:list --name=publications
 });
 // --------------------------------------------------------
 // route d'un parametre facultative:
@@ -137,6 +141,64 @@ Route::post('/form', function (Request $request) {
     //  il faut faire : $request->input('nom')  pour montrer à $request qu'il doit chercher dans le formulaire
     // dd($request->nom);
     // dd($request->input('nom'));  
-    dd($request->input('nom', 'default value ...')); // si le champ nom est inixistant dans le formulaire dd vas afficher
+    // dd($request->input('nom', 'default value ...')); // si le champ nom est inixistant dans le formulaire dd vas afficher
     //  la valeur par defaut
+    // dd($request->string('nom')->upper()); //rendre la cara en majiscul .
+    // dd($request->string('nom')->camel()); //pour supprimer le vide et la tabulation
+    $request->mergeIfMissing(['mydate' => date('Y-m-d')]);
+    dd($request->input('mydate'));
 })->name('form');
+// ----------------------------------- RESPONSE ------------------------------------------
+Route::get('/resp', function () {
+    $response = new Response('salamo alaykom', 500);
+    return $response;
+});
+// ----------------------------------- FILE ------------------------------------------
+// pour afficher un fichier
+Route::get('/file', function () {
+    return response()->file('storage/doc/cv-2025.pdf');
+});
+// ou
+Route::get('/file2', function () {
+    return response()->download('storage/doc/cv-2025.pdf', disposition: 'inline');
+});
+// pour télecharger un fichier
+Route::get('/file3', function () {
+    return response()->download('storage/doc/cv-2025.pdf');
+});
+// ----------------------------------- COOKIES ------------------------------------------
+Route::get('/cookie/set/{cookie}', function ($cookie) {
+    $response = new Response();
+    // $objectCookie = cookie('name', $cookie, 5);
+    $objectCookie = cookie()->forever('name', $cookie);//cookie qui reste un an
+    return $response->withCookie($objectCookie);
+    // clé , valeur , durée (en minute) .
+});
+Route::get('/cookie/get', function (Request $request) {
+    dd($request->cookie('name'));
+});
+// ------------------------------- HEADERS ---------------------------------------------
+Route::get('/headers', function (Request $request) {
+    $response = new Response([
+        ['id' => 33, 'name' => 'bouaicha', 'email' => 'b@gmail'],
+        ['id' => 24, 'name' => 'rouchdi', 'email' => 'r@gmail'],
+        ['id' => 567, 'name' => 'atta', 'email' => 'a@gmail'],
+    ]);
+    // dd($request->header('Content-Type'));
+    return $response->withHeaders([
+        'Content-Type' => 'Application/json',
+        'X-Bouaicha' => 'Yes',
+        // X-...  pour que le navigateur ne prend pas en consideration
+    ]);
+});
+// --------------------------------------- REQUESTS -----------------------------------------
+Route::get('/requests', function (Request $request) {
+    // dd($request->url()); //afficher l url
+    // dd($request->fullUrl()); //afficher l url et les params
+    // dd($request->path()); //afficher le path
+    // dd($request->is('requests')); //doit retourner true 
+    // dd($request->host()); // affiche le serveur recent
+    // dd($request->method()); // affiche la methode : get ou post ou delete ...
+    // dd($request->isMethod('GET')); // retourne ici true
+    dd($request->ip()); // affiche ip
+});

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        return view('publication.publications');
+        //  return view('publication.publications', compact('publications', 'size'));
+
     }
 
     /**
@@ -20,15 +23,24 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+        return view('publication.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PublicationRequest $request)
     {
-        //
+        // on doit générer un request pour valider les données:
+        //      php artisan make:Request PublicationRequest
+        $validate = $request->validated();
+        if ($request->hasFile('image'))
+            $validate['image'] = $request->file('image')->store('image', 'public');
+        else
+            $validate['image'] = '';
+        Publication::create($validate);
+        return redirect()->route('publications.index')->with('success', 'publication successfully inserted');
+        // dd($validation);
     }
 
     /**
