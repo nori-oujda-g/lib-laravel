@@ -48,18 +48,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-publication" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        publications
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-publication">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="{{ route('publications.create') }}">new pub</a></li>
-                        <li><a class="dropdown-item" href="{{ route('publications.index') }}">pubs</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('publications.all') }}">publications</a>
                 </li>
+                @if (!empty(Auth::guard('customer')->user()))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown-publication" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            my profil
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-publication">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="{{ route('publications.create') }}">new pub</a></li>
+                            <li><a class="dropdown-item" href="{{ route('publications.index') }}">my pubs</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                @endif
                 {{-- @guest
                 @endguest --}}
             </ul>
@@ -73,7 +78,10 @@
             <div class="navbar-nav dropdown float-end">
                 <ul class="nav-link dropdown-toggle btn-group" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false" style="padding:0;margin:0;">
-                    <li class="btn">{{ Auth::guard('customer')->user()->name }}</li>
+                    <li class="btn">
+                        id: {{ Auth::guard('customer')->user()->id }}<br>
+                        name: {{ Auth::guard('customer')->user()->name }}
+                    </li>
                     {{-- <li class="btn">{{ auth()->user()->name }}</li> --}}
                     {{-- <li class="btn" style="--bs-btn-padding-y:0;"> <img
                             src="{{ Auth::guard('customer')->user()->image }}" class="image" alt=""

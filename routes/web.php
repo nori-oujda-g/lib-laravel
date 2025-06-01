@@ -21,7 +21,10 @@ Route::get('/', function () {
     // qui est dans : exp1/resources/views
 })->name('home');
 
-
+Route::get('publications/all', [PublicationController::class, 'all'])->name('publications.all');
+Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::get('customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+// Route::get('publications', [PublicationController::class, 'index'])->name('publications.index');
 Route::middleware([Guest::class])->group(function () {
     Route::get('/login', [CustomerController::class, 'login'])->name('login');
     Route::post('/connect', [CustomerController::class, 'connect'])->name('connect');
@@ -102,9 +105,13 @@ Route::middleware([Authenticate::class])->group(function () {
 //         Route::post('/connect', 'connect')->name('connect');
 //     });
 // });
-    Route::resource('customers', CustomerController::class);
+    Route::resource('customers', CustomerController::class)->except(['index', 'show']);
     Route::resource('publications', PublicationController::class);
+    // Route::resource('publications', PublicationController::class)->except(['index']);
+
     // php artisan route:list --name=publications
+    // les deux tables serons liées :
+    // php artisan make:migration add_foreign_key_who_is_id_customer_to_publications --table=publications
 });
 // --------------------------------------------------------
 // route d'un parametre facultative:

@@ -25,7 +25,8 @@ class CustomerController extends Controller
     {
         // dd(Customer::all());
         // $customers = Customer::all();
-        $customers = Customer::paginate(10);
+        // $customers = Customer::paginate(10);
+        $customers = Customer::latest()->paginate(5);
         $size = '70px';
         return view('customer.customers', compact('customers', 'size'));
     }

@@ -43,4 +43,8 @@ class Customer extends Authenticatable
         else
             return $value . 'image/avatar.png';
     }
+    public function publications()
+    {
+        return $this->hasMany(Publication::class);
+    }
 }

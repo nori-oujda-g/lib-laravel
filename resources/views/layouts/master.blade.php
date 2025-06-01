@@ -21,11 +21,11 @@
     @vite('resources/css/app.css')
     <title>my lib laravel | @yield('title') </title>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //     }
+        // });
     </script>
 </head>
 

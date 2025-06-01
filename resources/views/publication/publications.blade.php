@@ -1,7 +1,16 @@
 @extends('layouts.master')
 @section('title')
-    pubs
+    my pubs
 @endsection
 @section('main')
-    <h2> pubs</h2>
+    <h2> my pubs</h2>
+    <div class="row justify-content-center align-items-center g-2 r0 l0">
+        @if (!empty(Auth::guard('customer')->user()))
+            @foreach ($publications as $publication)
+                @if (Auth::guard('customer')->user()->id == $publication->customer_id)
+                    <x-publication :publication="$publication" :optimise="true" :editor="false" />
+                @endif
+            @endforeach
+        @endif
+    </div>
 @endsection

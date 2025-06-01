@@ -31,3 +31,19 @@ footer {
 .navbar {
     --bs-navbar-padding-y: 2px;
 }
+
+.r0 {
+    margin-right: 0 !important;
+}
+
+.l0 {
+    margin-left: 0 !important;
+}
+
+/* .card-pub {
+    width: 200px;
+    height: 200px !important;
+} */
+.h300 {
+    height: 300px !important;
+}

@@ -13,5 +13,10 @@ class Publication extends Model
         'title',
         'image',
         'body',
+        'customer_id',
     ];
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
+    }
 }

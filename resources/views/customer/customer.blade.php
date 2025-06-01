@@ -8,7 +8,6 @@
     <img src="{{ $customer->image }}" alt=""> --}}
     <a name="" id="" class="btn btn-primary ms-2" href="{{ route('customers.index') }}" role="button"><i
             class="bi bi-arrow-return-left"></i></a>
-
     <div class="card container col-5"
         style="
             background-color:$ {
@@ -37,6 +36,16 @@
                 {{-- d-m-Y ==> 28-05-2025 --}}
                 {{-- d-m-y ==> 28-05-25 --}}
             </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <h3 class="ms-3">publications</h3>
+        {{-- {{ dd($customer->publications()) }} --}}
+        <div class="row justify-content-center align-items-center g-2 r0 l0 mt-4">
+            @foreach ($customer->publications as $publication)
+                <x-publication :publication="$publication" :optimise="false" :editor="false" />
+            @endforeach
         </div>
     </div>
 @endsection

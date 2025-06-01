@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationController extends Controller
 {
@@ -13,8 +14,16 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        return view('publication.publications');
-        //  return view('publication.publications', compact('publications', 'size'));
+        // $publications = Publication::all();
+        $publications = Publication::latest()->get();// afficher en ordre décroissant .
+        return view('publication.publications', compact('publications'));
+
+    }
+    public function all()
+    {
+        // $publications = Publication::all();
+        $publications = Publication::latest()->get();// afficher en ordre décroissant .
+        return view('publication.all', compact('publications'));
 
     }
 
@@ -38,6 +47,8 @@ class PublicationController extends Controller
             $validate['image'] = $request->file('image')->store('image', 'public');
         else
             $validate['image'] = '';
+        $validate['customer_id'] = Auth::guard('customer')->user()->id;
+        // dd($validate);
         Publication::create($validate);
         return redirect()->route('publications.index')->with('success', 'publication successfully inserted');
         // dd($validation);
@@ -56,15 +67,21 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        //
+        return view('publication.edit', compact('publication'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publication $publication)
+    public function update(PublicationRequest $request, Publication $publication)
     {
-        //
+        $validate = $request->validated();
+        if ($request->hasFile('image'))
+            $validate['image'] = $request->file('image')->store('image', 'public');
+        // dd($validate);
+        $publication->fill($validate)->save();
+        return redirect()->route('publications.index')->with('success', 'publication successfully updated');
+
     }
 
     /**
@@ -72,6 +89,8 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //
+        $publication->delete();
+        return redirect()->route('publications.index')->with('success', 'successful delete 🤓');
+
     }
 }
