@@ -6,7 +6,8 @@ use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
+use App\Services\AccessControl;
 class PublicationController extends Controller
 {
     /**
@@ -67,6 +68,15 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
+        // 1ere methode:
+        // if (Auth::guard('customer')->user()->id != $publication->customer_id)
+        //     // return redirect()->route('home');
+        //     abort(403);
+        // else
+        // return view('publication.edit', compact('publication'));
+        // dd(Gate::allows('optimise-publication', $publication));
+        AccessControl::AccessPub($publication);
+        // AccessControl::AccessPub($publication);
         return view('publication.edit', compact('publication'));
     }
 
@@ -75,13 +85,13 @@ class PublicationController extends Controller
      */
     public function update(PublicationRequest $request, Publication $publication)
     {
+        AccessControl::AccessPub($publication);
         $validate = $request->validated();
         if ($request->hasFile('image'))
             $validate['image'] = $request->file('image')->store('image', 'public');
         // dd($validate);
         $publication->fill($validate)->save();
         return redirect()->route('publications.index')->with('success', 'publication successfully updated');
-
     }
 
     /**
@@ -89,8 +99,10 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
+        AccessControl::AccessPub($publication);
+        // dd($publication);
         $publication->delete();
         return redirect()->route('publications.index')->with('success', 'successful delete 🤓');
-
     }
+
 }

@@ -45,9 +45,11 @@
                         <li><a class="dropdown-item" href="/api/customers/2">show customer</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
-                </li>
+                @if (!empty(Auth::guard('customer')->user()) && Auth::guard('customer')->user()->is_admin)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('publications.all') }}">publications</a>
                 </li>

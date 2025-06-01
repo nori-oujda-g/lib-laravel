@@ -22,6 +22,7 @@ class Customer extends Authenticatable
         'bio',
         'image',
         'password',
+        'is_admin',
     ];
     // laravel est très securisé il vas enpêcher de faire un ajout par post et $fillable vas faire une exception pour ces valeur ajoutés .
 
@@ -47,4 +48,9 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Publication::class);
     }
+    // public function isAdmin()
+    // {
+    //     return $this->role;  // True si admin
+    // }
+
 }

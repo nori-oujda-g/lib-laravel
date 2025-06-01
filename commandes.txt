@@ -97,3 +97,5 @@ creer un controlleur dans un nouveaux dossier pour un api :
     php artisan make:controller API/CustomerController --model=Customer --api
 pour verifier si les api de ce controlleur sont ajouté:
     php artisan route:list --model=Customer --api
+générer un provider:
+    php artisan make:provider AuthServiceProvider

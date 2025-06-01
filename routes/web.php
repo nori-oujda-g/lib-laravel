@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\compact;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Middleware\Authenticate;
@@ -22,15 +23,13 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('publications/all', [PublicationController::class, 'all'])->name('publications.all');
-Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
-Route::get('customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 // Route::get('publications', [PublicationController::class, 'index'])->name('publications.index');
 Route::middleware([Guest::class])->group(function () {
-    Route::get('/login', [CustomerController::class, 'login'])->name('login');
-    Route::post('/connect', [CustomerController::class, 'connect'])->name('connect');
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/connect', [LoginController::class, 'connect'])->name('connect');
 });
 Route::middleware([Authenticate::class])->group(function () {
-    Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/test', function () {
         return view('test');
     })->name('test');
@@ -105,11 +104,12 @@ Route::middleware([Authenticate::class])->group(function () {
 //         Route::post('/connect', 'connect')->name('connect');
 //     });
 // });
-    Route::resource('customers', CustomerController::class)->except(['index', 'show']);
+    Route::resource('customers', CustomerController::class);
     Route::resource('publications', PublicationController::class);
     // Route::resource('publications', PublicationController::class)->except(['index']);
 
     // php artisan route:list --name=publications
+    // php artisan route:list --name=customers
     // les deux tables serons liées :
     // php artisan make:migration add_foreign_key_who_is_id_customer_to_publications --table=publications
 });

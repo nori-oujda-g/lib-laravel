@@ -6,23 +6,28 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Requests\CustomerForUpdateRequest;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
+use App\Services\AccessControl;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use \Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\TryCatch;
 
 class CustomerController extends Controller
 {
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth');
-    //     $this->middleware(Authenticate::class);
-    // }
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        // $this->middleware(Authenticate::class);
+        AccessControl::AccessAdmin();
+    }
     public function index()
     {
+        // Gate::forUser(Auth::guard('customer')->user())->authorize('administrator-access');
+
         // dd(Customer::all());
         // $customers = Customer::all();
         // $customers = Customer::paginate(10);
@@ -131,30 +136,7 @@ class CustomerController extends Controller
         // back('/customer')->withInput();  retour à la page precedente avec le formulaire remplie .
         return redirect('/test');
     }
-    public function login()
-    {
-        return view('customer.login');
-    }
-    public function connect(Request $request): RedirectResponse
-    {
-        $credentials = ['email' => $request->login, 'password' => $request->password];
-        // dd(Auth::guard('customer')->attempt($credentials));
-        //se connecter directement vas faire des problemes , regarder le fichier: configuration-auth.md pour voir la configuration necessaire pour authentifiquation. 
-        if (Auth::guard('customer')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/')->with('success', 'you are well connected 😊');
-        } else {
-            return back()->withErrors([
-                'login' => 'email or password are incorrect'
-            ])->onlyInput('login');
-        }
-    }
-    public function logout(): RedirectResponse
-    {
-        Session::flush();
-        Auth::guard('customer')->logout();
-        return redirect('/')->with('success', 'you are well deconnected 🙄');
-    }
+
     public function destroy(Customer $customer)
     {
         return $customer->delete() ?
