@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use \Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +32,11 @@ class CustomerController extends Controller
         // dd(Customer::all());
         // $customers = Customer::all();
         // $customers = Customer::paginate(10);
-        $customers = Customer::latest()->paginate(5);
+        // $customers = Customer::latest()->paginate(5);
+        $customers = Cache::remember('customers', 10, function () {
+            return Customer::latest()->paginate(5);
+        });
+
         $size = '70px';
         return view('customer.customers', compact('customers', 'size'));
     }
@@ -49,6 +54,22 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         // cette methode appelé : Route model binding
+        // ici on travail avec le cache .
+
+        $cacheName = 'customer_' . $customer->id;
+        // 1ere methode du gestion du cache :
+        // if (Cache::has($cacheName))
+        //     $customer = Cache::get($cacheName);
+        // else
+        //     Cache::put($cacheName, $customer, 10);
+        // 2eme methode du gestion du cache:
+        $customer = Cache::remember($cacheName, 10, function () use ($customer): Customer {
+            return $customer;
+        });
+
+        // Cache::forever($cacheName, $customer); // cache d'une durrée infini
+        // Cache::put('customer_nor_3', $customer, 1);
+        // dd(Cache::get('customer_nor_3'));
         return view('customer.customer', compact('customer'));
     }
     public function create()

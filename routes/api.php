@@ -16,6 +16,7 @@ Route::get('/api1', function () {
 });
 
 Route::apiResource('customers', CustomerController::class);
+Route::get('querybuilder/customers', [CustomerController::class, 'querybuilder'])->name('customers.querybuilder');
 // Route::Apiget('/apia', function (Request $request) {
 //     dd($request->cookie('name'));
 // });

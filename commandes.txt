@@ -1,10 +1,7 @@
-https://www.youtube.com/watch?v=5SbVLK2_igw&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=66&ab_channel=JamaouiMouad
+https://www.youtube.com/watch?v=Gn3lIkgBQNs&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=70&ab_channel=JamaouiMouad
 00:00
+70- Sessions laravel darija
 ------------------------------------------------------------------------
-arret dans cette partie:
-https://www.youtube.com/watch?v=6BI7Vc2K32M&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=53
-Ajouter publication laravel darija
------------------------------------------------------------
 installation:
 	composer global require laravel/installer
 ajouter ce path à .bashrc et .zshrc dans /root et home
@@ -101,5 +98,7 @@ générer un provider:
     php artisan make:provider AuthServiceProvider
 générer une policy :
     php artisan make:policy MyModelPolicy --model=MyModel
-    php artisan make:policy PublicationPolicy --model=Publication
-
+générer une resource pour organiser l'affichage:
+    php artisan make:resource CustomerResource
+générer un cache table :
+    php artisan cache:table
