@@ -4,7 +4,7 @@
 @endsection
 @section('main')
     <h2>list customers</h2>
-    @if (!empty(Auth::guard('customer')->user()))
+    @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin)
         <a name="" id="" class="btn btn-primary ms-2" href="{{ route('customers.create') }}" role="button">
             <i class="bi bi-file-earmark-plus-fill"></i>
         </a>
@@ -13,7 +13,7 @@
         $mt = 'mt-2';
     @endphp
     <table class="table table-striped">
-        {{-- @if (!empty(Auth::guard('customer')->user())) --}}
+        {{-- @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin) --}}
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -22,7 +22,7 @@
                 <th scope="col">BIO</th>
                 <th scope="col">IMAGE</th>
                 <th scope="col">SHOW</th>
-                @if (!empty(Auth::guard('customer')->user()))
+                @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin)
                     <th scope="col">UPDATE</th>
                     <th scope="col">DEL</th>
                 @endif
@@ -42,7 +42,7 @@
                             <i class="bi bi-eye"></i>
                         </a>
                     </td>
-                    @if (!empty(Auth::guard('customer')->user()))
+                    @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin)
                         <td>
                             <form action="{{ route('customers.edit', $customer->id) }}" method="get">
                                 @csrf

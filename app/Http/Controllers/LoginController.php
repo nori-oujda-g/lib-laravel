@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
+    // remarque:
+    // Auth::guard('customer')->user()
+    // auth('customer')->user()
+    // auth()->guard('customer')->user()
+    // sont la même chose
     public function login()
     {
         return view('login.login');

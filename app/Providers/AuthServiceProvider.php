@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Customer;
 use App\Models\Publication;
+use App\Policies\PublicationPolicy;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -13,6 +14,10 @@ use App\Models\User;
 use App\Policies\UserPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        Publication::class => PublicationPolicy::class,
+    ];
+
     /**
      * Register services.
      */

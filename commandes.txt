@@ -1,5 +1,5 @@
-https://www.youtube.com/watch?v=Vvkj2OvywS4&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=48
-08:00
+https://www.youtube.com/watch?v=5SbVLK2_igw&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=66&ab_channel=JamaouiMouad
+00:00
 ------------------------------------------------------------------------
 arret dans cette partie:
 https://www.youtube.com/watch?v=6BI7Vc2K32M&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=53
@@ -99,3 +99,7 @@ pour verifier si les api de ce controlleur sont ajouté:
     php artisan route:list --model=Customer --api
 générer un provider:
     php artisan make:provider AuthServiceProvider
+générer une policy :
+    php artisan make:policy MyModelPolicy --model=MyModel
+    php artisan make:policy PublicationPolicy --model=Publication
+

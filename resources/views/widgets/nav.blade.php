@@ -45,7 +45,7 @@
                         <li><a class="dropdown-item" href="/api/customers/2">show customer</a></li>
                     </ul>
                 </li>
-                @if (!empty(Auth::guard('customer')->user()) && Auth::guard('customer')->user()->is_admin)
+                @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('customers.index') }}">customers</a>
                     </li>
@@ -53,7 +53,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('publications.all') }}">publications</a>
                 </li>
-                @if (!empty(Auth::guard('customer')->user()))
+                @if (!empty(auth('customer')->user()))
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown-publication" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,25 +71,22 @@
                 @endguest --}}
             </ul>
         </div>
-        @if (empty(Auth::guard('customer')->user()))
+        @if (empty(auth('customer')->user()))
             <div class="navbar-nav float-end">
                 <a class="nav-link" href="{{ route('login') }}">se connecter</a>
             </div>
         @endif
-        @if (!empty(Auth::guard('customer')->user()))
+        @if (!empty(auth('customer')->user()))
             <div class="navbar-nav dropdown float-end">
                 <ul class="nav-link dropdown-toggle btn-group" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false" style="padding:0;margin:0;">
-                    <li class="btn">
-                        id: {{ Auth::guard('customer')->user()->id }}<br>
-                        name: {{ Auth::guard('customer')->user()->name }}
-                    </li>
+                    <li class="btn"> {{ auth('customer')->user()->name }} </li>
                     {{-- <li class="btn">{{ auth()->user()->name }}</li> --}}
                     {{-- <li class="btn" style="--bs-btn-padding-y:0;"> <img
-                            src="{{ Auth::guard('customer')->user()->image }}" class="image" alt=""
+                            src="{{ auth('customer')->user()->image }}" class="image" alt=""
                             srcset=""></li> --}}
                     <li class="btn" style="--bs-btn-padding-y:0;"> <img
-                            src="{{ asset('storage/' . Auth::guard('customer')->user()->avatar) }}" class="image"
+                            src="{{ asset('storage/' . auth('customer')->user()->avatar) }}" class="image"
                             alt="" srcset=""></li>
 
                 </ul>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Services\AccessControl;
+
 class PublicationController extends Controller
 {
     /**
@@ -48,7 +49,7 @@ class PublicationController extends Controller
             $validate['image'] = $request->file('image')->store('image', 'public');
         else
             $validate['image'] = '';
-        $validate['customer_id'] = Auth::guard('customer')->user()->id;
+        $validate['customer_id'] = auth('customer')->user()->id;
         // dd($validate);
         Publication::create($validate);
         return redirect()->route('publications.index')->with('success', 'publication successfully inserted');
@@ -75,8 +76,11 @@ class PublicationController extends Controller
         // else
         // return view('publication.edit', compact('publication'));
         // dd(Gate::allows('optimise-publication', $publication));
+        // dd(auth('customer')->user());
+        // dd(auth()->guard('customer')->user());
+
+        // $this->authorize('update', $publication); // pour PublicationPlicy mais elle ne fonctionne pas 😭
         AccessControl::AccessPub($publication);
-        // AccessControl::AccessPub($publication);
         return view('publication.edit', compact('publication'));
     }
 
