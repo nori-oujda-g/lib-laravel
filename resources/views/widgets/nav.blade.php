@@ -41,8 +41,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-api">
                         <li><a class="dropdown-item" href="/api/api1">simple exp</a></li>
-                        <li><a class="dropdown-item" href="/api/customers">customers</a></li>
-                        <li><a class="dropdown-item" href="/api/customers/2">show customer</a></li>
+                        <li><a class="dropdown-item" href="{{ route('api.customers.index') }}">customers</a></li>
+                        <li><a class="dropdown-item" href="{{ route('api.customers.show', 2) }}">show customer</a></li>
+                        <li><a class="dropdown-item" href="{{ route('api.customers.querybuilder') }}">query builder</a>
+                        </li>
                     </ul>
                 </li>
                 @if (!empty(auth('customer')->user()) && auth('customer')->user()->is_admin)

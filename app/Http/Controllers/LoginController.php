@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
@@ -24,6 +25,9 @@ class LoginController extends Controller
         //se connecter directement vas faire des problemes , regarder le fichier: configuration-auth.md pour voir la configuration necessaire pour authentifiquation. 
         if (Auth::guard('customer')->attempt($credentials)) {
             $request->session()->regenerate();
+            DB::table('sessions')->update([
+                'user_id' => auth('customer')->user()->id,
+            ]);
             return redirect('/')->with('success', 'you are well connected 😊');
         } else {
             return back()->withErrors([

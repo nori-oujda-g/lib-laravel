@@ -15,8 +15,11 @@ Route::get('/api1', function () {
     // la reponse est dans ce lien : http://127.0.0.1:8000/api/api1
 });
 
-Route::apiResource('customers', CustomerController::class);
-Route::get('querybuilder/customers', [CustomerController::class, 'querybuilder'])->name('customers.querybuilder');
+// Route::apiResource('customers', CustomerController::class);
+Route::name('api.')->group(function () {
+    Route::apiResource('customers', CustomerController::class);
+    Route::get('querybuilder/customers', [CustomerController::class, 'querybuilder'])->name('customers.querybuilder');
+});
 // Route::Apiget('/apia', function (Request $request) {
 //     dd($request->cookie('name'));
 // });

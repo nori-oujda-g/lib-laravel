@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Log;
 use PhpParser\Node\Stmt\TryCatch;
 
 class CustomerController extends Controller
@@ -33,6 +34,7 @@ class CustomerController extends Controller
         // $customers = Customer::all();
         // $customers = Customer::paginate(10);
         // $customers = Customer::latest()->paginate(5);
+
         $customers = Cache::remember('customers', 10, function () {
             return Customer::latest()->paginate(5);
         });

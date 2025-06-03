@@ -52,5 +52,8 @@ class Customer extends Authenticatable
     // {
     //     return $this->role;  // True si admin
     // }
-
+    public function getAuthIdentifierName()
+    {
+        return 'id'; // Par défaut, ok ici
+    }
 }

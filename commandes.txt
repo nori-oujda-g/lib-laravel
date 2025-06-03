@@ -102,3 +102,8 @@ générer une resource pour organiser l'affichage:
     php artisan make:resource CustomerResource
 générer un cache table :
     php artisan cache:table
+générer une session table :
+    php artisan session:table
+génerer un listener:
+    php artisan make:listener UpdateSessionCustomerId
+
