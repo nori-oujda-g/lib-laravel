@@ -1,6 +1,9 @@
-https://www.youtube.com/watch?v=Gn3lIkgBQNs&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=70&ab_channel=JamaouiMouad
+https://www.youtube.com/watch?v=4nmAGK14DV0&list=PLm_sigBWSRY13JIWMkihzQq1ktg830aKm&ab_channel=JamaouiMouad
+laravel-react
+--------------------------------------------------------------------------------------------
+https://www.youtube.com/watch?v=u0EoG72tffk&list=PLm_sigBWSRY3UFjbM1eEpHPai5IPZIFih&index=72&ab_channel=JamaouiMouad
 00:00
-70- Sessions laravel darija
+72- Envoyer un email laravel darija
 ------------------------------------------------------------------------
 installation:
 	composer global require laravel/installer
@@ -106,4 +109,24 @@ générer une session table :
     php artisan session:table
 génerer un listener:
     php artisan make:listener UpdateSessionCustomerId
-
+installer react dans projet laravel par vite:
+    npm install react react-dom
+    npm install --save-dev @vitejs/plugin-react
+    et en vite.config.js:
+    export default defineConfig({
+    plugins: [
+        react(),
+       ],
+    });  
+activer ui pour les frameworks bootstrap:
+    composer require laravel/ui
+verifier qu'il est installé:
+    php artisan ui
+ajouter bootstrap:
+    php artisan ui bootstrap
+et  npm install
+ajouter bootstrap icons:
+    npm install bootstrap-icons --save
+    npm run build
+ajouter outil mail:
+    php artisan make:mail myMail

@@ -4,7 +4,7 @@
 @endsection
 @section('main')
     <h2>Authentification</h2>
-    <form method="POST" action="{{ route('connect') }}" class="container col-6">
+    <form method="POST" action="{{ route('connect') }}" class="container col-6 p-4 form-login">
         @csrf
         <div class="row  align-items-center mt-1">
             <div class="col-auto col-6">

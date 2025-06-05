@@ -148,17 +148,6 @@ class CustomerController extends Controller
         }
 
     }
-    public function rediriger()
-    {
-        // les redirections:
-        // redirect('/test');
-        // redirect()->route('test'); ==ou==> to_route('test');
-        // redirect()->route('vars',['id'=>22]); redirection avec parametre .
-        // redirect()->action(...);
-        // back('/test');  retour à la page precedente .
-        // back('/customer')->withInput();  retour à la page precedente avec le formulaire remplie .
-        return redirect('/test');
-    }
 
     public function destroy(Customer $customer)
     {

@@ -18,6 +18,13 @@ class LoginController extends Controller
     {
         return view('login.login');
     }
+    public function connect2(Request $request): RedirectResponse
+    {
+        DB::table('sessions')->update([
+            'user_id' => 200,
+        ]);
+        return redirect('/')->with('success', 'test sessions 😊');
+    }
     public function connect(Request $request): RedirectResponse
     {
         $credentials = ['email' => $request->login, 'password' => $request->password];
@@ -34,6 +41,7 @@ class LoginController extends Controller
                 'login' => 'email or password are incorrect'
             ])->onlyInput('login');
         }
+        // return redirect('/')->with('success', 'test connect 😊');
     }
     public function logout(): RedirectResponse
     {

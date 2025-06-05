@@ -16,11 +16,45 @@ use Illuminate\Support\Facades\Route;
 type de routes qu'on a: 
 GET,POST,PUT,DELETE,PATCH,CONNECT,OPTION
 */
-Route::get('/', function () {
-    return view('welcome');
-    // il pointe et fait le routage sur la page welcome.blade.php
-    // qui est dans : exp1/resources/views
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+//     // il pointe et fait le routage sur la page welcome.blade.php
+//     // qui est dans : exp1/resources/views
+// })->name('home');
+Route::get('/', [homeController::class, 'index'])->name('home');
+Route::get('/mail', [homeController::class, 'mail'])->name('home.mail');
+Route::get('/vars', function () {
+    $ville = 'oujda';
+    return view('vars', [
+        'ville' => $ville,
+        'cours' => ['math', 'physique', 'arabe'],
+    ]);
+})->name('vars');
+
+Route::get('/vars2/{nom}', function ($nom) {
+    return view('vars2', [
+        'nom' => $nom
+    ]);
+})->name('vars2');
+Route::get('/vars3/{nom}/{prenom}', function (Request $request) {
+    // dd($request);
+    return view('vars3', [
+        'nom' => $request->nom,
+        'prenom' => $request->prenom,
+    ]);
+})->name('vars3');
+Route::get('/test', function () {
+    return view('test');
+})->name('test');
+
+Route::get('/controller', [homeController::class, 'index'])->name('controller');
+Route::get('/controller2/{nom}', [homeController::class, 'index2'])->name('controller2');
+Route::get('/compact', [compact::class, 'index'])->name('compact')
+    // ->middleware('auth');
+    // ->middleware(Authenticate::class); //en cas appliquer middlewar sur un seul lien .
+;
+Route::get('/users', [compact::class, 'users'])->name('users');
+Route::get('/rediriger', [homeController::class, 'rediriger'])->name('rediriger');
 
 Route::get('publications/all', [PublicationController::class, 'all'])->name('publications.all');
 // Route::get('publications', [PublicationController::class, 'index'])->name('publications.index');
@@ -30,38 +64,6 @@ Route::middleware([Guest::class])->group(function () {
 });
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/test', function () {
-        return view('test');
-    })->name('test');
-    Route::get('/vars', function () {
-        $ville = 'oujda';
-        return view('vars', [
-            'ville' => $ville,
-            'cours' => ['math', 'physique', 'arabe'],
-        ]);
-    })->name('vars');
-
-    Route::get('/vars2/{nom}', function ($nom) {
-        return view('vars2', [
-            'nom' => $nom
-        ]);
-    })->name('vars2');
-    Route::get('/vars3/{nom}/{prenom}', function (Request $request) {
-        // dd($request);
-        return view('vars3', [
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-        ]);
-    })->name('vars3');
-
-    Route::get('/controller', [homeController::class, 'index'])->name('controller');
-    Route::get('/controller2/{nom}', [homeController::class, 'index2'])->name('controller2');
-    Route::get('/compact', [compact::class, 'index'])->name('compact')
-        // ->middleware('auth');
-        // ->middleware(Authenticate::class); //en cas appliquer middlewar sur un seul lien .
-    ;
-    Route::get('/users', [compact::class, 'users'])->name('users');
-    Route::get('/rediriger', [CustomerController::class, 'rediriger'])->name('rediriger');
 
     // Route::get('/customers/{id}', [CustomerController::class, 'get'])
 // Route::get('/customers/{customer:email}', [CustomerController::class, 'show']) si on veut specifier le paramettre exemple : email
